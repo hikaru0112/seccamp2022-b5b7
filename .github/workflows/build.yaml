@@ -48,10 +48,9 @@ jobs:
       - name: Sign the container image
         env:
           COSIGN_EXPERIMENTAL: "true"
-        run: cosign sign --force ghcr.io/${{ github.actor }}@${{ steps.push-step.outputs.digest }}
+        run: cosign sign --force ghcr.io/hikaru0112/test-image:latest
 
       - name: Verify the container image
         env:
           COSIGN_EXPERIMENTAL: "true"
-        run: cosign verify ghcr.io/${{ github.actor }}@${{ steps.push-step.outputs.digest }}
-
+        run: cosign verify ghcr.io/hikaru0112/test-image:latest
