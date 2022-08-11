@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
+
       - name: install cosign
         uses: sigstore/cosign-installer@main
 
@@ -44,13 +44,14 @@ jobs:
             ghcr.io/hikaru0112/test-image:latest
           platforms: linux/amd64
           push: true
+
       - name: Sign the container image
         env:
           COSIGN_EXPERIMENTAL: "true"
-        run: cosign sign --force ghcr.io/${{ github.repository }}@${{ steps.push-step.outputs.digest }}
+        run: cosign sign --force ghcr.io/${{ github.actor }}@${{ steps.push-step.outputs.digest }}
 
       - name: Verify the container image
         env:
           COSIGN_EXPERIMENTAL: "true"
-        run: cosign verify ghcr.io/${{ github.repository }}@${{ steps.push-step.outputs.digest }}
+        run: cosign verify ghcr.io/${{ github.actor }}@${{ steps.push-step.outputs.digest }}
 
