@@ -23,7 +23,7 @@ jobs:
           password: ${{ github.token }}
 
       # TODO: add cosign-installer etc.
-
+      #use docker
       - name: Prepare Dockerfile
         run: |
           echo "FROM alpine:3.10" > Dockerfile
